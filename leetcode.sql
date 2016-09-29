@@ -42,6 +42,13 @@ FROM Logs l1, Logs l2, Logs l3
 WHERE l3.Id-l2.Id=1 AND l2.Id-l1.Id=1 AND l3.Num=l2.Num AND l2.Num=l1.Num
 
 /* 178. Rank Scores */
+SELECT a.Score, 
+(SELECT COUNT(DISTINCT b.Score)+1 
+FROM Scores b
+WHERE a.Score < b.Score
+) AS Rank
+FROM Scores a
+ORDER BY a.Score DESC
 
 /* 177. Nth Highest Salary */
 /* Answer 1 */

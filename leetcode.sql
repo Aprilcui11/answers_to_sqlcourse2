@@ -100,7 +100,13 @@ WHERE u.Banned='No' AND u.Role='client'
 GROUP BY t.Request_at
 ORDER BY t.Request_at
 
-
+/* 184. Department Highest Salary */
+SELECT d.Name AS Department, e1.Name AS Employee, e1.Salary
+FROM Employee e1, Department d
+WHERE e1.Salary >= ALL(
+ SELECT e2.Salary FROM Employee e2
+ WHERE e1.Id<>e2.Id AND e1.DepartmentId=e2.DepartmentId)
+AND e1.DepartmentId=d.Id
 
 
 
